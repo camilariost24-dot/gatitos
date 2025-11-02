@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Galería de Gatos</title>
+</head>
+<body>
+  <h1>Galería de Gatos</h1>
+  <button id="btn">Mostrar un gato 🐾</button>
+  <div id="contenedor"></div>
+
+  <script>
+    const btn = document.getElementById("btn");
+    const contenedor = document.getElementById("contenedor");
+
+    btn.addEventListener("click", () => {
+      fetch("https://api.thecatapi.com/v1/images/search")
+        .then(res => res.json())
+        .then(data => {
+          const imgUrl = data[0].url;
+          contenedor.innerHTML = `<img src="${imgUrl}" width="400">`;
+        })
+        .catch(err => console.error("Error:", err));
+    });
+  </script>
+</body>
+</html>
